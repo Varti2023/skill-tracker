@@ -13,11 +13,11 @@ public class SkillsController {
                 "<body>" +
                 "<h1>Skills Tracker</h1>" +
                 "<h2>We have a few skills we would like to learn. Here is a list!</h2>" +
-                "<table style=\"border:1px solid black\" align=center>" +
-                "<tr><td>Java</td></tr>" +
-                "<tr><td>Javascript</td></tr>" +
-                "<tr><td>Python</td></tr>" +
-                "</table>" +
+                "<ol>" +
+                "<li>Java</li>" +
+                "<li>Javascript</li>" +
+                "<li>Python</li>" +
+                "</ol>" +
                 "</body>" +
                 "</html>";
     }
@@ -25,31 +25,41 @@ public class SkillsController {
     public String userForm(){
         return "<html>" +
                 "<body>" +
-                "<form action='/form' method='post'>" +
-                "<label for='name'>Your Name:</label>" +
-                "<input type='text' name='name'>" +
-                "</br>"+
-                "<label for='firstLang'>First favorite language:</label>" +
-                "<select name='firstFavLang' id='favLang'>" +
+                "<form action='/results' method='post'>" +
+                "<table>" +
+                "<tr>" +
+                "<td><label for='name'>Your Name:</label></td>" +
+                "<td><input type='text' name='name'></td>" +
+                "</tr>"+
+                "<tr>" +
+                "<td><label for='firstLang'>First favorite language:</label></td>" +
+                "<td><select name='firstFavLang' id='favLang'>" +
                 "<option>Java</option>" +
                 "<option>Javascript</option>" +
                 "<option>Python</option>" +
-                "</select>" +
-                "</br>"+
-                "<label for='secondLang'>Second favorite language:</label>" +
-                "<select name='secondFavLang' id='favLang'>" +
+                "</select></td>" +
+                "</tr>"+
+                "<tr>" +
+                "<td><label for='secondLang'>Second favorite language:</label></td>" +
+                "<td><select name='secondFavLang' id='favLang'>" +
                 "<option>Java</option>" +
                 "<option>Javascript</option>" +
                 "<option>Python</option>" +
-                "</select>" +
-                "</br>"+
-                "<label for='thirdLang'>Third favorite language:</label>" +
-                "<select name='thirdFavLang' id='favLang'>" +
+                "</select></td>" +
+                "</tr>"+
+                "<tr>" +
+                "<td><label for='thirdLang'>Third favorite language:</label></td>" +
+                "<td><select name='thirdFavLang' id='favLang'>" +
                 "<option>Java</option>" +
                 "<option>Javascript</option>" +
                 "<option>Python</option>" +
-                "</select>" +
-                "<input type='submit' value='Submit'>"+
+                "</select></td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td></td>" +
+                "<td><input type='submit' value='Submit'></td>"+
+                "</tr>" +
+                "</table>" +
                 "</form>" +
                 "<body>" +
                 "<html>";
@@ -64,11 +74,28 @@ public class SkillsController {
                 "<body>" +
                 "<h1>Hi "+name+"</h1>"+
                 "<ol>" +
-                "<li>"+firstFavLang+"</li>" +
-                "<li>"+secondFavLang+"</li>" +
-                "<li>"+thirdFavLang+"</li>" +
-                "</ol>";
+                "<li>My first fav lang is: "+firstFavLang+"</li>" +
+                "<li>My second fav lang is: "+secondFavLang+"</li>" +
+                "<li>My third fav lang is: "+thirdFavLang+"</li>" +
 
+                "</ol>";
+    }
+
+    @ResponseBody
+    @PostMapping("/results")
+    public String displayResults(@RequestParam String name, @RequestParam String firstFavLang, @RequestParam String secondFavLang, @RequestParam String thirdFavLang) {
+        return "<html>" +
+                "<body>" +
+                "<h1>Form Results</h1>" +
+                "<h2>Here is the information you submitted:</h2>" +
+                "<ol>" +
+                "<li>Name: " + name + "</li>" +
+                "<li>1st fav language: " + firstFavLang + "</li>" +
+                "<li>2nd fav language: " + secondFavLang + "</li>" +
+                "<li>3rd fav language: " + thirdFavLang + "</li>" +
+                "</ol>" +
+                "</body>" +
+                "</html>";
     }
 
 }
